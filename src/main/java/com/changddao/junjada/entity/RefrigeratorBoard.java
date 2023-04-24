@@ -15,6 +15,8 @@ public class RefrigeratorBoard extends BaseEntity{
     @Column(name = "refrigerator_board_id")
     private Long id;
     @NotNull
+    private String productName;
+    @NotNull
     private String title;
     @NotNull
     @Column(length = 500)
