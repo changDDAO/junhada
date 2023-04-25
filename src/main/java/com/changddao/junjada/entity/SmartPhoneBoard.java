@@ -2,6 +2,7 @@ package com.changddao.junjada.entity;
 
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class SmartPhoneBoard extends BaseEntity{
     @Id
     @GeneratedValue
@@ -19,7 +21,7 @@ public class SmartPhoneBoard extends BaseEntity{
     @NotNull
     private String title;
     @NotNull
-    @Column(length = 500)
+    @Column(length = 1000)
     private String content;
 
     @ManyToOne(fetch = LAZY) //연관관계의 주인

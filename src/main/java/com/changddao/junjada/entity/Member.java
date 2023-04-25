@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,12 +26,19 @@ public class Member extends BaseEntity{
     @NotNull
     private String password;
     @NotNull
+    @Embedded
     private Address address;
     @OneToMany(mappedBy = "member")//거울
     private List<RefrigeratorBoard> refrigeratorBoards = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")//거울
     private List<SmartPhoneBoard> smartPhoneBoards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")//거울
+    private List<LaptopBoard> laptopBoards = new ArrayList<>();
+
+    @OneToOne(fetch = LAZY, mappedBy = "member")
+    RefrigeratorReply laptopReply;
 
 
 
@@ -39,4 +48,7 @@ public class Member extends BaseEntity{
         this.password = password;
         this.address = address;
     }
+
+    //연관관계메서드
+
 }

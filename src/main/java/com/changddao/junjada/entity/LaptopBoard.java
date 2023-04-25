@@ -10,13 +10,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.*;
+import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class RefrigeratorBoard extends BaseEntity{
-    @Id @GeneratedValue
-    @Column(name = "refrigerator_board_id")
+public class LaptopBoard extends BaseEntity {
+    @Id
+    @GeneratedValue
+    @Column(name = "laptop_board_id")
     private Long id;
     @NotNull
     private String productName;
@@ -30,13 +31,14 @@ public class RefrigeratorBoard extends BaseEntity{
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "refrigeratorBoard")
-    List<RefrigeratorReply> refrigeratorReplies = new ArrayList<>();
+    @OneToMany(mappedBy = "laptopBoard")
+    List<LaptopReply> laptopReplies = new ArrayList<>();
+
 
     //연관관계 메서드
     public void setMember(Member member){
         this.member = member;
-        member.getRefrigeratorBoards().add(this);
+        member.getLaptopBoards().add(this);
     }
 
 
