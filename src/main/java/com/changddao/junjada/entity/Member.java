@@ -37,8 +37,13 @@ public class Member extends BaseEntity{
     @OneToMany(mappedBy = "member")//거울
     private List<LaptopBoard> laptopBoards = new ArrayList<>();
 
-    @OneToOne(fetch = LAZY, mappedBy = "member")
-    RefrigeratorReply laptopReply;
+    @OneToMany( mappedBy = "member")
+    List<RefrigeratorReply> refrigeratorReplies = new ArrayList<>();
+
+    @OneToMany( mappedBy = "member")
+    List<SmartPhoneReply> smartPhoneReplies = new ArrayList<>();
+    @OneToMany( mappedBy = "member")
+    List<LaptopReply> laptopReplies = new ArrayList<>();
 
 
 
@@ -48,7 +53,9 @@ public class Member extends BaseEntity{
         this.password = password;
         this.address = address;
     }
-
-    //연관관계메서드
+    //메서드
+    public void changeNickname(String name) {
+        this.nickName = name;
+    }
 
 }

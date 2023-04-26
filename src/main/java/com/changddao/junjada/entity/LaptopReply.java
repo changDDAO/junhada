@@ -17,7 +17,7 @@ public class LaptopReply extends BaseEntity{
     @Column(name = "laptop_reply_id")
     private Long id;
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -27,6 +27,18 @@ public class LaptopReply extends BaseEntity{
     @NotNull
     private String replyContent;
 
+    //연관관계 메서드
+    public void setLaptopBoard(LaptopBoard laptopBoard) {
+        this.laptopBoard = laptopBoard;
+        laptopBoard.getLaptopReplies().add(this);
+    }
 
+    public void setMember(Member member){
+        this.member = member;
+        member.getLaptopReplies().add(this);
+    }
 
+    public LaptopReply(String replyContent) {
+        this.replyContent = replyContent;
+    }
 }

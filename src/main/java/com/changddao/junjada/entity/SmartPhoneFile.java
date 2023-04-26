@@ -31,5 +31,10 @@ public class SmartPhoneFile {
         smartPhoneBoard.getSmartPhoneFiles().add(this);
     }
 
-
+ //constructor
+    public SmartPhoneFile(String originName, String savedName, String savedPath) {
+        this.originName = originName;
+        this.savedName = savedName;
+        this.savedPath = savedPath;
+    }
 }

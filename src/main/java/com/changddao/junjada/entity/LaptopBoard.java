@@ -46,7 +46,11 @@ public class LaptopBoard extends BaseEntity {
         this.member = member;
         member.getLaptopBoards().add(this);
     }
-
-
-
+    //constructor
+    public LaptopBoard(String productName, int productPrice, String title, String content) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.title = title;
+        this.content = content;
+    }
 }

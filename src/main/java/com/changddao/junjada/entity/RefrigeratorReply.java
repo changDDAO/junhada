@@ -18,7 +18,7 @@ public class RefrigeratorReply extends BaseEntity{
     @Column(name = "refrigerator_reply_id")
     private Long id;
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -28,4 +28,17 @@ public class RefrigeratorReply extends BaseEntity{
     @NotNull
     private String replyContent;
 
+    //연관관계 메서드
+    public void setRefrigeratorBoard(RefrigeratorBoard refrigeratorBoard) {
+        this.refrigeratorBoard = refrigeratorBoard;
+        refrigeratorBoard.getRefrigeratorReplies().add(this);
+    }
+    public void setMember(Member member){
+        this.member = member;
+        member.getRefrigeratorReplies().add(this);
+    }
+    //constructor
+    public RefrigeratorReply(String replyContent) {
+        this.replyContent = replyContent;
+    }
 }
