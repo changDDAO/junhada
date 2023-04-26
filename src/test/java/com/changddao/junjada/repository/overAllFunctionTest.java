@@ -4,14 +4,14 @@ import com.changddao.junjada.entity.Address;
 import com.changddao.junjada.entity.LaptopBoard;
 import com.changddao.junjada.entity.LaptopReply;
 import com.changddao.junjada.entity.Member;
+import com.changddao.junjada.repository.laptop.LaptopBoardRepository;
+import com.changddao.junjada.repository.laptop.LaptopReplyRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @SpringBootTest
 @Rollback(value = false)

@@ -1,4 +1,4 @@
-package com.changddao.junjada.repository;
+package com.changddao.junjada.repository.smartphone;
 
 import com.changddao.junjada.entity.SmartPhoneFile;
 import org.springframework.data.jpa.repository.JpaRepository;
