@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,6 +21,9 @@ public class SmartPhoneBoard extends BaseEntity{
     private Long id;
     @NotNull
     private String productName;
+
+    @NotNull
+    private int productPrice;
     @NotNull
     private String title;
     @NotNull
@@ -27,6 +33,12 @@ public class SmartPhoneBoard extends BaseEntity{
     @ManyToOne(fetch = LAZY) //연관관계의 주인
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "smartPhoneBoard")
+    List<SmartPhoneReply> smartPhoneReplies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "smartPhoneBoard")
+    List<SmartPhoneFile> smartPhoneFiles = new ArrayList<>();
 
     //연관관계 메서드
     public void setMember(Member member){

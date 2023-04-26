@@ -20,6 +20,9 @@ public class RefrigeratorBoard extends BaseEntity{
     private Long id;
     @NotNull
     private String productName;
+
+    @NotNull
+    private int productPrice;
     @NotNull
     private String title;
     @NotNull
@@ -33,12 +36,19 @@ public class RefrigeratorBoard extends BaseEntity{
     @OneToMany(mappedBy = "refrigeratorBoard")
     List<RefrigeratorReply> refrigeratorReplies = new ArrayList<>();
 
+    @OneToMany(mappedBy = "refrigeratorBoard")
+    List<RefrigeratorFile> refrigeratorFiles = new ArrayList<>();
+
     //연관관계 메서드
     public void setMember(Member member){
         this.member = member;
         member.getRefrigeratorBoards().add(this);
     }
 
-
-
+    public RefrigeratorBoard(String productName, int productPrice, String title, String content) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.title = title;
+        this.content = content;
+    }
 }

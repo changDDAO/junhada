@@ -21,6 +21,9 @@ public class LaptopBoard extends BaseEntity {
     private Long id;
     @NotNull
     private String productName;
+
+    @NotNull
+    private int productPrice;
     @NotNull
     private String title;
     @NotNull
@@ -33,6 +36,9 @@ public class LaptopBoard extends BaseEntity {
 
     @OneToMany(mappedBy = "laptopBoard")
     List<LaptopReply> laptopReplies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "laptopBoard")
+    private List<LaptopFile> laptopFiles = new ArrayList<>();
 
 
     //연관관계 메서드
