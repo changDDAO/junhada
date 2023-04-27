@@ -1,6 +1,6 @@
 package com.changddao.junhada.controller.laptop;
 
-import com.changddao.junhada.service.LaptopFileService;
+import com.changddao.junhada.service.laptop.LaptopFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

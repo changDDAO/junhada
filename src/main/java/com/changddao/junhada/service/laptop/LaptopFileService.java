@@ -1,4 +1,4 @@
-package com.changddao.junhada.service;
+package com.changddao.junhada.service.laptop;
 
 import com.changddao.junhada.entity.LaptopFile;
 import com.changddao.junhada.repository.laptop.LaptopFileRepository;
@@ -33,6 +33,7 @@ public class LaptopFileService {
   String savedPath = fileDir+savedName;
 
   LaptopFile laptopFile = new LaptopFile(originName,savedName,savedPath);
+  //laptopFile.setBoard();  보드를 지정해주는 로직 들어가야함
   files.transferTo(new File(savedPath));
   LaptopFile savedLaptopFile = laptopFileRepository.save(laptopFile);
  return savedLaptopFile.getId();

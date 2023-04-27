@@ -1,4 +1,4 @@
-package com.changddao.junjada.repository;
+package com.changddao.junhada.repository;
 
 import com.changddao.junhada.entity.Address;
 import com.changddao.junhada.entity.LaptopBoard;
@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @SpringBootTest
 @Rollback(value = false)
@@ -64,6 +66,21 @@ class overAllFunctionTest {
         laptopReplyRepository.save(laptopReply);
         //then
         Assertions.assertThat(laptopReply.getMember().getNickName()).isEqualTo("기무찌");
+
+    }
+    @Test
+    public void findByEmail(){
+    //given
+        Member member1 = new Member("younch8342@naver.com","창따오","a12345",
+                new Address("261","대구","청수로","캐슬"));
+        memberRepository.save(member1);
+
+
+    //when
+        List<Member> byEmail = memberRepository.findByEmail(member1.getEmail());
+        //then
+        System.out.println("email: "+byEmail.get(0).getEmail());
+
 
     }
 
