@@ -1,11 +1,12 @@
 package com.changddao.junjada.repository;
 
-import com.changddao.junjada.entity.Address;
-import com.changddao.junjada.entity.LaptopBoard;
-import com.changddao.junjada.entity.LaptopReply;
-import com.changddao.junjada.entity.Member;
-import com.changddao.junjada.repository.laptop.LaptopBoardRepository;
-import com.changddao.junjada.repository.laptop.LaptopReplyRepository;
+import com.changddao.junhada.entity.Address;
+import com.changddao.junhada.entity.LaptopBoard;
+import com.changddao.junhada.entity.LaptopReply;
+import com.changddao.junhada.entity.Member;
+import com.changddao.junhada.repository.MemberRepository;
+import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
+import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
