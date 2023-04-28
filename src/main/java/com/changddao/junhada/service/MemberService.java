@@ -5,6 +5,7 @@ import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.repository.MemberRepository;
 import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-    MemberRepository memberRepository;
-    LaptopBoardRepository laptopBoardRepository;
+   private final MemberRepository memberRepository;
+    private final LaptopBoardRepository laptopBoardRepository;
+   /* @Autowired
+    public MemberService(MemberRepository memberRepository, LaptopBoardRepository laptopBoardRepository){
+        this.memberRepository = memberRepository;
+        this.laptopBoardRepository = laptopBoardRepository;
+    }*/
 
     //회원가입
     public Long memberJoin(Member member){
