@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymelaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="d-flex w-25" th:fragment="leftBanner">
+    <div class="container">
+
+    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/junhadaLogo/tablet.jpg" width="300" height="250" class="d-block" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/junhadaLogo/refrigerator.png" width="300" height="300" class="d-block" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/junhadaLogo/laptop.jpg" width="300" height="350" class="d-block" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/junhadaLogo/airconditioner.jpg" width="300" height="350" class="d-block" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    </div>
+</div>
+<div class="d-flex w-25 float-end" th:fragment="rightBanner">
+    <div class="container">
+
+        <div id="carouselExample2Controls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/junhadaLogo/smartwatch.jpg" width="300" height="250" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/junhadaLogo/CoffeeMachine.jpg" width="300" height="300" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/junhadaLogo/fan.jpg" width="250" height="350" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/junhadaLogo/cleaner.jpg"  class="d-block" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2Controls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2Controls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
