@@ -1,6 +1,6 @@
 package com.changddao.junhada.service.laptop;
 
-import com.changddao.junhada.entity.LaptopFile;
+import com.changddao.junhada.entity.laptop.LaptopFile;
 import com.changddao.junhada.repository.laptop.LaptopFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

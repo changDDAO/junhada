@@ -1,5 +1,7 @@
-package com.changddao.junhada.entity;
+package com.changddao.junhada.entity.laptop;
 
+import com.changddao.junhada.entity.BaseEntity;
+import com.changddao.junhada.entity.Member;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import static javax.persistence.FetchType.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class LaptopReply extends BaseEntity{
+public class LaptopReply extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "laptop_reply_id")
     private Long id;

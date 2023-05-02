@@ -1,6 +1,6 @@
 package com.changddao.junhada.repository.laptop;
 
-import com.changddao.junhada.entity.LaptopReply;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 
 import java.util.List;
 

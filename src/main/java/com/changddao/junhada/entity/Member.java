@@ -1,5 +1,11 @@
 package com.changddao.junhada.entity;
 
+import com.changddao.junhada.entity.laptop.LaptopBoard;
+import com.changddao.junhada.entity.laptop.LaptopReply;
+import com.changddao.junhada.entity.refrigerator.RefrigeratorBoard;
+import com.changddao.junhada.entity.refrigerator.RefrigeratorReply;
+import com.changddao.junhada.entity.smartphone.SmartPhoneBoard;
+import com.changddao.junhada.entity.smartphone.SmartPhoneReply;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;

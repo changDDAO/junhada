@@ -1,5 +1,7 @@
-package com.changddao.junhada.entity;
+package com.changddao.junhada.entity.refrigerator;
 
+import com.changddao.junhada.entity.BaseEntity;
+import com.changddao.junhada.entity.Member;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,14 +12,13 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class LaptopBoard extends BaseEntity {
-    @Id
-    @GeneratedValue
-    @Column(name = "laptop_board_id")
+public class RefrigeratorBoard extends BaseEntity {
+    @Id @GeneratedValue
+    @Column(name = "refrigerator_board_id")
     private Long id;
     @NotNull
     private String productName;
@@ -34,20 +35,19 @@ public class LaptopBoard extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "laptopBoard")
-    List<LaptopReply> laptopReplies = new ArrayList<>();
+    @OneToMany(mappedBy = "refrigeratorBoard")
+    List<RefrigeratorReply> refrigeratorReplies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "laptopBoard")
-    private List<LaptopFile> laptopFiles = new ArrayList<>();
-
+    @OneToMany(mappedBy = "refrigeratorBoard")
+    List<RefrigeratorFile> refrigeratorFiles = new ArrayList<>();
 
     //연관관계 메서드
     public void setMember(Member member){
         this.member = member;
-        member.getLaptopBoards().add(this);
+        member.getRefrigeratorBoards().add(this);
     }
-    //constructor
-    public LaptopBoard(String productName, int productPrice, String title, String content) {
+
+    public RefrigeratorBoard(String productName, int productPrice, String title, String content) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.title = title;

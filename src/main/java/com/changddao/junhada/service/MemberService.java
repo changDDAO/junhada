@@ -1,18 +1,16 @@
 package com.changddao.junhada.service;
 
-import com.changddao.junhada.entity.LaptopBoard;
-import com.changddao.junhada.entity.LaptopReply;
+import com.changddao.junhada.entity.laptop.LaptopBoard;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.repository.MemberRepository;
 import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
 import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

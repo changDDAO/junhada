@@ -1,5 +1,7 @@
-package com.changddao.junhada.entity;
+package com.changddao.junhada.entity.smartphone;
 
+import com.changddao.junhada.entity.BaseEntity;
+import com.changddao.junhada.entity.Member;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class SmartPhoneBoard extends BaseEntity{
+public class SmartPhoneBoard extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "smartphone_board_id")

@@ -1,10 +1,9 @@
 package com.changddao.junhada.repository;
 
 import com.changddao.junhada.entity.Address;
-import com.changddao.junhada.entity.LaptopBoard;
-import com.changddao.junhada.entity.LaptopReply;
+import com.changddao.junhada.entity.laptop.LaptopBoard;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.entity.Member;
-import com.changddao.junhada.repository.MemberRepository;
 import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
 import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
 import org.assertj.core.api.Assertions;

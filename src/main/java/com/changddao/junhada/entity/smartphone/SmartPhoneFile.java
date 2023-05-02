@@ -1,4 +1,4 @@
-package com.changddao.junhada.entity;
+package com.changddao.junhada.entity.smartphone;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,10 +11,10 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class RefrigeratorFile {
+public class SmartPhoneFile {
 
     @Id @GeneratedValue
-    @Column(name = "refrigerator_file_id")
+    @Column(name = "smartphone_file_id")
     private Long id;
 
     private String originName;
@@ -22,16 +22,17 @@ public class RefrigeratorFile {
     private String savedPath;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "refrigerator_board_id")
-    private RefrigeratorBoard refrigeratorBoard;
+    @JoinColumn(name = "smartphone_board_id")
+    private SmartPhoneBoard smartPhoneBoard;
 
     //연관관계 메서드
-    public void setBoard(RefrigeratorBoard refrigeratorBoard){
-        this.refrigeratorBoard = refrigeratorBoard;
-        refrigeratorBoard.getRefrigeratorFiles().add(this);
+    public void setBoard(SmartPhoneBoard smartPhoneBoard){
+        this.smartPhoneBoard = smartPhoneBoard;
+        smartPhoneBoard.getSmartPhoneFiles().add(this);
     }
-    //constructor
-    public RefrigeratorFile(String originName, String savedName, String savedPath) {
+
+ //constructor
+    public SmartPhoneFile(String originName, String savedName, String savedPath) {
         this.originName = originName;
         this.savedName = savedName;
         this.savedPath = savedPath;

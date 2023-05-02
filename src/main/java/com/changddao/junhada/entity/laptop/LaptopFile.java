@@ -1,4 +1,4 @@
-package com.changddao.junhada.entity;
+package com.changddao.junhada.entity.laptop;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

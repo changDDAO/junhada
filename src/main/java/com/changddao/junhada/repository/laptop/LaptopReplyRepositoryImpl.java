@@ -1,10 +1,7 @@
 package com.changddao.junhada.repository.laptop;
 
-import com.changddao.junhada.entity.LaptopReply;
-import com.changddao.junhada.entity.QLaptopReply;
-import com.changddao.junhada.entity.QMember;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import java.util.List;
