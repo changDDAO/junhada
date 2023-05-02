@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +35,7 @@ public class MemberService {
     }
     //중복회원 검증 logic //성공
     public void validateDuplicateMember(Member member) {
-        List<Member> findMemberByEmail = memberRepository.findByEmail(member.getEmail());
+        Optional<Member> findMemberByEmail = memberRepository.findByEmail(member.getEmail());
         if(!findMemberByEmail.isEmpty())
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         else return;

@@ -49,6 +49,9 @@ public class Member extends BaseEntity{
     @OneToMany( mappedBy = "member")
     List<LaptopReply> laptopReplies = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    List<Authority> roles = new ArrayList<>();
+
 
 
     public Member(String email, String nickName, String password, Address address) {

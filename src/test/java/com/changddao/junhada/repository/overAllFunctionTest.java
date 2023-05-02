@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @Rollback(value = false)
@@ -76,9 +77,14 @@ class overAllFunctionTest {
 
 
     //when
-        List<Member> byEmail = memberRepository.findByEmail(member1.getEmail());
-        //then
-        System.out.println("email: "+byEmail.get(0).getEmail());
+        Optional<Member> byEmail = memberRepository.findByEmail(member1.getEmail());
+        if(byEmail.isEmpty()){
+            System.out.println("이메일없음");
+        }
+        else{
+            System.out.println("email: "+byEmail.get().getEmail());
+
+        }
 
 
     }
