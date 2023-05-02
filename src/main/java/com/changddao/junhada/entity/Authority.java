@@ -19,8 +19,15 @@ public class Authority {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    public Authority(String memberRole) {
+        this.memberRole = memberRole;
+    }
+
     //연관관계 메서드
     public void setMember(Member member) {
+        if (this.member != null) {
+            this.member.getRoles().remove(this);
+        }
         this.member=member;
         member.getRoles().add(this);
     }
