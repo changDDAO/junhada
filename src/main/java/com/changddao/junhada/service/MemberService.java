@@ -19,7 +19,6 @@ import java.util.Optional;
 public class MemberService {
    private final MemberRepository memberRepository;
     private final LaptopBoardRepository laptopBoardRepository;
-
     private final LaptopReplyRepository laptopReplyRepository;
    /* @Autowired
     public MemberService(MemberRepository memberRepository, LaptopBoardRepository laptopBoardRepository){

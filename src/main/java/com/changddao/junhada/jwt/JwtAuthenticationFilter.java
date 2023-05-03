@@ -11,7 +11,7 @@ import java.io.IOException;
 
 //Jwt가 유효성을 검증하는 Filter
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
-    //Spring이 자동으로 di해줌
+    //Spring이 자동으로 di해줌 왜? @Component annotation으로 빈등록했으니까
     private final JwtProvider jwtProvider;
     public JwtAuthenticationFilter(JwtProvider jwtProvider) {
         this.jwtProvider = jwtProvider;

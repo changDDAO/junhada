@@ -1,7 +1,7 @@
 package com.changddao.junhada.jwt;
 
 import com.changddao.junhada.entity.Authority;
-import com.changddao.junhada.service.CustomUserDetailService;
+import com.changddao.junhada.security.CustomUserDetailService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
