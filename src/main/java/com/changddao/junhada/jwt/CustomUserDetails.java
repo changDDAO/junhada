@@ -1,4 +1,4 @@
-package com.changddao.junhada.repository;
+package com.changddao.junhada.jwt;
 
 import com.changddao.junhada.entity.Member;
 import org.springframework.security.core.GrantedAuthority;

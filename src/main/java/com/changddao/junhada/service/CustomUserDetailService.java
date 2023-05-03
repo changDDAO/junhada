@@ -1,7 +1,7 @@
 package com.changddao.junhada.service;
 
 import com.changddao.junhada.entity.Member;
-import com.changddao.junhada.repository.CustomUserDetails;
+import com.changddao.junhada.jwt.CustomUserDetails;
 import com.changddao.junhada.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

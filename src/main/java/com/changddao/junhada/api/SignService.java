@@ -13,21 +13,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class SignService {
     private final MemberRepository memberRepository;
-    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
     public SignResponse login(SignRequestDto request)throws Exception{
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(
-                () -> new BadCredentialsException("잘못된 계정정보입니다.")
+                () -> new BadCredentialsException("잘못된 계정 정보입니다.")
         );
         if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
-            throw new BadCredentialsException("잘못된 계정정보입니다.");
+            throw new BadCredentialsException("잘못된 계정 정보입니다.");
         }
         return SignResponse.builder()
                 .id(member.getId())
@@ -52,12 +53,9 @@ public class SignService {
                     .password(passwordEncoder.encode(request.getPassword()))
                     .address(adr)
                     .build();
-            memberRepository.save(member);
-            Member findMember = memberRepository.findByEmail(request.getEmail()).orElse(null);
-            Authority memberRole = Authority.builder().memberRole("ROLE_USER").build();
-            memberRole.setMember(findMember);
-            authorityRepository.save(memberRole);
 
+            member.setRoles(Collections.singletonList(Authority.builder().memberRole("ROLE_USER").build()));
+            memberRepository.save(member);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new Exception("잘못된 요청입니다.");

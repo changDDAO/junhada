@@ -13,6 +13,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Getter
 @Builder
@@ -49,7 +51,12 @@ public class Member extends BaseEntity{
     @OneToMany( mappedBy = "member")
     List<LaptopReply> laptopReplies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    //처음에는 왜이렇게 구현했지 최적화에 문제있을텐데? 라고 생각했다가 Spring Security를 사용한다면 불가피한 조치
+    //회원가입시 Role을 지정해주어야함 아니면 Security filter에서 걸림
+    //role entity를 생성하고 연관메서드로 주입하려 했으나 실패 security때문에 어쩔 수 없는 부분이란 생각이 듬
+    //그리고 최적화부분에서 따지고 보면 크게 문제가 되지도않음 왜?
+    //Member가 여러 Role을 가질수 있지만, 그 Role이 많아봤자 얼마나 많겠나 걱정ㄴㄴ
+    @OneToMany(mappedBy = "member", fetch = EAGER, cascade = CascadeType.ALL)
     List<Authority> roles = new ArrayList<>();
 
 
@@ -63,6 +70,11 @@ public class Member extends BaseEntity{
     //메서드
     public void changeNickname(String name) {
         this.nickName = name;
+    }
+
+    public void setRoles(List<Authority> roles) {
+        this.roles = roles;
+        roles.forEach(o->o.setMember(this));
     }
 
 }

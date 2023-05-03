@@ -26,6 +26,7 @@ import java.util.List;
 public class JwtProvider {
 
     private final CustomUserDetailService customUserDetailService;
+    //sha-256알고리즘
     @Value("${jwt.secret.key}")
     private String salt;
     private Key secretKey;

@@ -1,5 +1,6 @@
 package com.changddao.junhada.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,10 +14,12 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Authority {
     @Id @GeneratedValue
+    @JsonIgnore
     private Long id;
     private String memberRole;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     public Authority(String memberRole) {
@@ -29,7 +32,7 @@ public class Authority {
             this.member.getRoles().remove(this);
         }
         this.member=member;
-        member.getRoles().add(this);
+
     }
 
 }
