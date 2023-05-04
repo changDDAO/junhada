@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,11 +39,12 @@
                         <li><a class="dropdown-item" href="#" th:href="@{/refrigerator/board}"><p class="fw-bold">냉장고 리뷰 게시판</p></a></li>
                     </ul>
                 </li>
-                <li class="nav-item"> <!--th:classappend 이용해서 로그인시 안보이게 설정해주기!-->
+                <!--th:classappend 이용해서 로그인시 안보이게 설정해주기!-->
+                <li class="nav-item">
                     <a class="nav-link " href="#" th:href="@{/members/new}">회원가입</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#" th:href="@{/members/login}">로그인</a>
+                    <a class="nav-link" href="#" th:href="@{/members/login}">로그인</a>
                 </li>
             </ul>
 
@@ -49,6 +52,7 @@
     </div>
 </nav>
 <div class="footer" th:fragment="footer">
+
     <p class="text-center">&copy; 전자제품을 리뷰하는 웹사이트 <img src="/junhadaLogo/logo.png"></p>
 </div>
 

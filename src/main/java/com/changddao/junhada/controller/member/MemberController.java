@@ -4,6 +4,7 @@ import com.changddao.junhada.controller.MsgAlert;
 import com.changddao.junhada.entity.Address;
 import com.changddao.junhada.entity.Authority;
 import com.changddao.junhada.entity.Member;
+import com.changddao.junhada.jwt.JwtProvider;
 import com.changddao.junhada.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+    private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
     @GetMapping("/members/new")
     public String memberForm(Model model){
@@ -48,13 +50,12 @@ public class MemberController {
     @PostMapping("/members/login")
     public String login(@Valid LoginForm loginForm, BindingResult result, Model model) {
         if(result.hasErrors()) return "members/memberLoginForm";
-        System.out.println("로그인전");
-        //문제가 있는부분
-       System.out.println("token:"+memberService.login(loginForm));
-        //문제가 있는부분
-
-        model.addAttribute("data", new MsgAlert("로그인이 완료 되었습니다.", "/"));
-        return "message";
+        MemberSignResponse passedMember = memberService.login(loginForm);
+        System.out.println("email"+passedMember.getEmail());
+        System.out.println("token"+passedMember.getToken());
+        System.out.println(jwtProvider.getAccount(passedMember.getToken()));
+        model.addAttribute("passedMember", passedMember);
+        return "home";
     }
 
 }

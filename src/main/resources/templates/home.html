@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/common::head">
 </head>
 <body>
@@ -12,6 +13,7 @@
 
    <div class="container" style="background-color: #5c636a">
       <div class="jumbotron">
+         <p th:if="${passedMember!=null}"? th:text="${passedMember.email}"></p>
       <h1><p class="text-white">전자제품을 리뷰하다.</p></h1>
          <img src = /junhadaLogo/logo.png class="img-fluid"><br>
          <br><br><br><br><br>
@@ -25,6 +27,5 @@
 </div>
 
 <div th:replace="fragments/common::footer"></div>
-
 </body>
 </html>
