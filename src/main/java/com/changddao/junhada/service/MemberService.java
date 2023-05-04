@@ -1,12 +1,17 @@
 package com.changddao.junhada.service;
 
+import com.changddao.junhada.controller.member.LoginForm;
+import com.changddao.junhada.controller.member.MemberSignResponse;
 import com.changddao.junhada.entity.laptop.LaptopBoard;
 import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.entity.Member;
+import com.changddao.junhada.jwt.JwtProvider;
 import com.changddao.junhada.repository.MemberRepository;
 import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
 import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +25,8 @@ public class MemberService {
    private final MemberRepository memberRepository;
     private final LaptopBoardRepository laptopBoardRepository;
     private final LaptopReplyRepository laptopReplyRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
    /* @Autowired
     public MemberService(MemberRepository memberRepository, LaptopBoardRepository laptopBoardRepository){
         this.memberRepository = memberRepository;
@@ -38,6 +45,23 @@ public class MemberService {
         if(!findMemberByEmail.isEmpty())
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         else return;
+    }
+    //login하기
+    public MemberSignResponse login(LoginForm request) {
+        Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(
+                ()-> new BadCredentialsException("잘못된 계정 정보입니다.")
+        );
+        if (passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+            throw new BadCredentialsException("잘못된 계정 정보입니다.");
+        }
+        return MemberSignResponse.builder()
+                .memberId(member.getId())
+                .nickName(member.getNickName())
+                .email(member.getEmail())
+                .roles(member.getRoles())
+                .token(jwtProvider.createToken(member.getEmail(), member.getRoles()))
+                .build();
+
     }
 
     //회원이 작성한 글 불러오기 ex)laptopBoard  //성공

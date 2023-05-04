@@ -45,4 +45,6 @@ public class MemberController {
         model.addAttribute("loginForm",new MemberForm());
         return "members/memberLoginForm";
     }
+    @PostMapping("/members/login")
+
 }
