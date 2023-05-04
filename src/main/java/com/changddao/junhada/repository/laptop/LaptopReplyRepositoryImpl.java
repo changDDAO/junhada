@@ -6,8 +6,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.changddao.junhada.entity.QLaptopReply.*;
+
 import static com.changddao.junhada.entity.QMember.*;
+import static com.changddao.junhada.entity.laptop.QLaptopReply.*;
 
 public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom{
     JPAQueryFactory queryFactory;

@@ -47,20 +47,14 @@ public class MemberService {
         else return;
     }
     //login하기
-    public MemberSignResponse login(LoginForm request) {
+    public String login(LoginForm request) {
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(
                 ()-> new BadCredentialsException("잘못된 계정 정보입니다.")
         );
-        if (passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
             throw new BadCredentialsException("잘못된 계정 정보입니다.");
         }
-        return MemberSignResponse.builder()
-                .memberId(member.getId())
-                .nickName(member.getNickName())
-                .email(member.getEmail())
-                .roles(member.getRoles())
-                .token(jwtProvider.createToken(member.getEmail(), member.getRoles()))
-                .build();
+        return jwtProvider.createToken(member.getEmail(),member.getRoles());
 
     }
 

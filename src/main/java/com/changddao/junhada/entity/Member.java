@@ -27,7 +27,7 @@ public class Member extends BaseEntity{
     @NotNull @Column(unique = true)
     private String email;
     @NotNull
-    @Column(length = 10)
+    @Column(length = 10, unique = true)
     private String nickName;
     @NotNull
     private String password;

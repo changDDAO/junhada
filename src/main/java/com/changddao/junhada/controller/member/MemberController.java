@@ -46,5 +46,15 @@ public class MemberController {
         return "members/memberLoginForm";
     }
     @PostMapping("/members/login")
+    public String login(@Valid LoginForm loginForm, BindingResult result, Model model) {
+        if(result.hasErrors()) return "members/memberLoginForm";
+        System.out.println("로그인전");
+        //문제가 있는부분
+       System.out.println("token:"+memberService.login(loginForm));
+        //문제가 있는부분
+
+        model.addAttribute("data", new MsgAlert("로그인이 완료 되었습니다.", "/"));
+        return "message";
+    }
 
 }
