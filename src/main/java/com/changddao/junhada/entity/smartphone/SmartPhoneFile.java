@@ -13,7 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class SmartPhoneFile {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "smartphone_file_id")
     private Long id;
 

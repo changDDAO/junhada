@@ -16,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class RefrigeratorReply extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "refrigerator_reply_id")
     private Long id;
 

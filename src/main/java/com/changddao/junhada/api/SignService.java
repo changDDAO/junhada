@@ -4,11 +4,9 @@ import com.changddao.junhada.entity.Address;
 import com.changddao.junhada.entity.Authority;
 import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.jwt.JwtProvider;
-import com.changddao.junhada.repository.AuthorityRepository;
 import com.changddao.junhada.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +52,7 @@ public class SignService {
                     .address(adr)
                     .build();
 
-            member.setRoles(Collections.singletonList(Authority.builder().memberRole("ROLE_USER").build()));
+            member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
             memberRepository.save(member);
         } catch (Exception e) {
             System.out.println(e.getMessage());

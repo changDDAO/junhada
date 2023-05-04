@@ -13,7 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class RefrigeratorFile {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "refrigerator_file_id")
     private Long id;
 

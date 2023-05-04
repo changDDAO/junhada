@@ -15,7 +15,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class SmartPhoneReply extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "smartphone_reply_id")
     Long id;
 

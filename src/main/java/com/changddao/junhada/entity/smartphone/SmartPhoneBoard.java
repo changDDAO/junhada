@@ -18,7 +18,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class SmartPhoneBoard extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "smartphone_board_id")
     private Long id;
     @NotNull

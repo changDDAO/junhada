@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -37,7 +36,7 @@ public class MemberController {
                 , memberForm.getStreet(), memberForm.getDetail());
         Member member = new Member(memberForm.getEmail(), memberForm.getNickName(),
                 passwordEncoder.encode(memberForm.getPassword()), address);
-        member.setRoles(Collections.singletonList(Authority.builder().memberRole("ROLE_USER").build()));
+        member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
         memberService.memberJoin(member);
         model.addAttribute("data",new MsgAlert("회원가입이 완료되었습니다.","/"));
         return "message";

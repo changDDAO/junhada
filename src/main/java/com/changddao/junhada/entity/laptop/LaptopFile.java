@@ -11,7 +11,7 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor
 @Getter
 public class LaptopFile {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "laptop_file_id")
     private Long id;
 

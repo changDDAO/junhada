@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class RefrigeratorBoard extends BaseEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "refrigerator_board_id")
     private Long id;
     @NotNull

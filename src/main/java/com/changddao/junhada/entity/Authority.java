@@ -13,18 +13,16 @@ import static javax.persistence.FetchType.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Authority {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    private String memberRole;
+    private String name;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     @JsonIgnore
     private Member member;
 
-    public Authority(String memberRole) {
-        this.memberRole = memberRole;
-    }
+
 
     //연관관계 메서드
     public void setMember(Member member) {
