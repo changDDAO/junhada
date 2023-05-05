@@ -2,10 +2,10 @@ package com.changddao.junhada.entity;
 
 import com.changddao.junhada.entity.laptop.LaptopBoard;
 import com.changddao.junhada.entity.laptop.LaptopReply;
+import com.changddao.junhada.entity.phone.PhoneBoard;
+import com.changddao.junhada.entity.phone.PhoneReply;
 import com.changddao.junhada.entity.refrigerator.RefrigeratorBoard;
 import com.changddao.junhada.entity.refrigerator.RefrigeratorReply;
-import com.changddao.junhada.entity.smartphone.SmartPhoneBoard;
-import com.changddao.junhada.entity.smartphone.SmartPhoneReply;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -20,11 +20,13 @@ import static javax.persistence.FetchType.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseEntity{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Member extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
-    @NotNull @Column(unique = true)
+    @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     @Column(length = 10, unique = true)
@@ -38,17 +40,17 @@ public class Member extends BaseEntity{
     private List<RefrigeratorBoard> refrigeratorBoards = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")//거울
-    private List<SmartPhoneBoard> smartPhoneBoards = new ArrayList<>();
+    private List<PhoneBoard> phoneBoards = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")//거울
     private List<LaptopBoard> laptopBoards = new ArrayList<>();
 
-    @OneToMany( mappedBy = "member")
+    @OneToMany(mappedBy = "member")
     List<RefrigeratorReply> refrigeratorReplies = new ArrayList<>();
 
-    @OneToMany( mappedBy = "member")
-    List<SmartPhoneReply> smartPhoneReplies = new ArrayList<>();
-    @OneToMany( mappedBy = "member")
+    @OneToMany(mappedBy = "member")
+    List<PhoneReply> phoneReplies = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
     List<LaptopReply> laptopReplies = new ArrayList<>();
 
     //처음에는 왜이렇게 구현했지 최적화에 문제있을텐데? 라고 생각했다가 Spring Security를 사용한다면 불가피한 조치
@@ -60,13 +62,13 @@ public class Member extends BaseEntity{
     List<Authority> roles = new ArrayList<>();
 
 
-
     public Member(String email, String nickName, String password, Address address) {
         this.email = email;
         this.nickName = nickName;
         this.password = password;
         this.address = address;
     }
+
     //메서드
     public void changeNickname(String name) {
         this.nickName = name;
@@ -74,7 +76,7 @@ public class Member extends BaseEntity{
 
     public void setRoles(List<Authority> roles) {
         this.roles = roles;
-        roles.forEach(o->o.setMember(this));
+        roles.forEach(o -> o.setMember(this));
     }
 
 }

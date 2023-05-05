@@ -14,7 +14,7 @@
     <link href="/css/jumbotron-narrow.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark text-white"  th:fragment="bodyHeader">
+<nav class="navbar navbar-dark bg-dark text-white"  th:fragment="bodyHeader(#session)">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" th:href="@{/}">
             <img src="/junhadaLogo/logo.png" alt="" width="90" height="40">
@@ -40,11 +40,15 @@
                     </ul>
                 </li>
                 <!--th:classappend 이용해서 로그인시 안보이게 설정해주기!-->
-                <li class="nav-item">
+                <li class="nav-item" th:classappend="${#session}?'visually-hidden':''">
                     <a class="nav-link " href="#" th:href="@{/members/new}">회원가입</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item"th:classappend="${#session}?'visually-hidden':''">
                     <a class="nav-link" href="#" th:href="@{/members/login}">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <div class="text-lg-start" th:if="${#session} ne null" th:text="|***${#session.getAttribute('user').nickName}님 반갑습니다.***|"></div>
+
                 </li>
             </ul>
 

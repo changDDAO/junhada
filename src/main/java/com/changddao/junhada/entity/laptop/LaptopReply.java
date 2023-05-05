@@ -15,7 +15,7 @@ import static javax.persistence.FetchType.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class LaptopReply extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name = "laptop_reply_id")
     private Long id;
 

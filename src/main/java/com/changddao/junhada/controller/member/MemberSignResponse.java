@@ -2,10 +2,7 @@ package com.changddao.junhada.controller.member;
 
 import com.changddao.junhada.entity.Authority;
 import com.changddao.junhada.entity.Member;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
 public class MemberSignResponse {
     private Long memberId;
     private String email;

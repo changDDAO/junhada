@@ -4,7 +4,7 @@
 <head th:replace="fragments/common::head">
 </head>
 <body>
-<div th:replace="fragments/common :: bodyHeader">
+<div th:replace="fragments/common :: bodyHeader(session)">
 </div>
 <div class="d-flex align-items-center w-100">
 
@@ -13,7 +13,6 @@
 
    <div class="container" style="background-color: #5c636a">
       <div class="jumbotron">
-         <p th:if="${passedMember!=null}"? th:text="${passedMember.email}"></p>
       <h1><p class="text-white">전자제품을 리뷰하다.</p></h1>
          <img src = /junhadaLogo/logo.png class="img-fluid"><br>
          <br><br><br><br><br>

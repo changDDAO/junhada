@@ -1,29 +1,28 @@
-package com.changddao.junhada.entity.smartphone;
+package com.changddao.junhada.entity.phone;
 
-import com.changddao.junhada.entity.BaseEntity;
 import com.changddao.junhada.entity.Member;
-import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class SmartPhoneBoard extends BaseEntity {
+public class PhoneBoard {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "smartphone_board_id")
+    @GeneratedValue
+    @Column(name = "phone_board_id")
     private Long id;
     @NotNull
     private String productName;
-
     @NotNull
     private int productPrice;
     @NotNull
@@ -36,16 +35,23 @@ public class SmartPhoneBoard extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "smartPhoneBoard")
-    List<SmartPhoneReply> smartPhoneReplies = new ArrayList<>();
+    @OneToMany(mappedBy = "phoneBoard")
+    List<PhoneReply> phoneReplies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "smartPhoneBoard")
-    List<SmartPhoneFile> smartPhoneFiles = new ArrayList<>();
+    @OneToMany(mappedBy = "phoneBoard")
+    private List<PhoneFile> phoneFiles = new ArrayList<>();
+
 
     //연관관계 메서드
     public void setMember(Member member){
         this.member = member;
-        member.getSmartPhoneBoards().add(this);
+        member.getPhoneBoards().add(this);
     }
-
+    //constructor
+    public PhoneBoard(String productName, int productPrice, String title, String content) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.title = title;
+        this.content = content;
+    }
 }

@@ -1,4 +1,4 @@
-package com.changddao.junhada.entity.laptop;
+package com.changddao.junhada.entity.phone;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,29 +10,27 @@ import static javax.persistence.FetchType.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class LaptopFile {
-    @Id @GeneratedValue
-    @Column(name = "laptop_file_id")
-    private Long id;
+public class PhoneFile {
 
+    @Id @GeneratedValue
+    @Column(name="phone_file_id")
+    private Long id;
     private String originName;
     private String savedName;
     private String savedPath;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "laptop_board_id")
-    private LaptopBoard laptopBoard;
+    @JoinColumn(name = "phone_board_id")
+    private PhoneBoard phoneBoard;
 
-    //연관관계 메서드
-    public void setLaptopBoard(LaptopBoard laptopBoard){
-        this.laptopBoard = laptopBoard;
-        laptopBoard.getLaptopFiles().add(this);
+    public void setPhoneBoard(PhoneBoard phoneBoard) {
+        this.phoneBoard = phoneBoard;
+        phoneBoard.getPhoneFiles().add(this);
     }
 
-    public LaptopFile(String originName, String savedName, String savedPath) {
+    public PhoneFile(String originName, String savedName, String savedPath) {
         this.originName = originName;
         this.savedName = savedName;
         this.savedPath = savedPath;
     }
-
 }

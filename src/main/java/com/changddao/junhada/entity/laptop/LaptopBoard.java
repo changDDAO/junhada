@@ -18,7 +18,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 public class LaptopBoard extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "laptop_board_id")
     private Long id;
     @NotNull
@@ -37,7 +37,7 @@ public class LaptopBoard extends BaseEntity {
     private Member member;
 
     @OneToMany(mappedBy = "laptopBoard")
-    List<LaptopReply> laptopReplies = new ArrayList<>();
+    private List<LaptopReply> laptopReplies = new ArrayList<>();
 
     @OneToMany(mappedBy = "laptopBoard")
     private List<LaptopFile> laptopFiles = new ArrayList<>();
