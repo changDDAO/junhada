@@ -47,9 +47,13 @@
                     <a class="nav-link" href="#" th:href="@{/members/login}">로그인</a>
                 </li>
                 <li class="nav-item">
-                    <div class="text-lg-start" th:if="${#session} ne null" th:text="|***${#session.getAttribute('user').nickName}님 반갑습니다.***|"></div>
+                    <div class="text-lg-start" th:if="${#session ne null}"  th:text="${#session.getAttribute('user')?.nickName}+'님 반갑습니다( _ _ )'">
+                    </div>
 
                 </li>
+                <form class="d_flex" action="/members/logout" method="post"  th:classappend="${#session}?'':'visually-hidden'">
+                    <button type="submit" class="btn btn-outline-primary">로그아웃</button>
+                </form>
             </ul>
 
         </div>

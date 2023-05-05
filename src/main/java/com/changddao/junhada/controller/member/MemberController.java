@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collections;
@@ -51,19 +52,21 @@ public class MemberController {
         return "members/memberLoginForm";
     }
     @PostMapping("/members/login")
-    public String login(@Valid LoginForm loginForm, BindingResult result, Model model
-            ,HttpSession session) {
+    public String login(@Valid LoginForm loginForm, BindingResult result, Model model,
+                        HttpServletRequest request) {
         if(result.hasErrors()) return "members/memberLoginForm";
         MemberSignResponse passedMember = memberService.login(loginForm);
+        HttpSession session = request.getSession();
         session.setAttribute("user",passedMember);
         model.addAttribute("data", new MsgAlert("로그인이 완료되었습니다.", "/"));
         return "message";
     }
 
     @PostMapping("/members/logout")
-    public String logout(@ModelAttribute("user")MemberSignResponse memberSignResponse,
-                         SessionStatus sessionStatus, Model model) {
-        sessionStatus.setComplete();
+    public String logout(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        //System.out.println(request.getHeader("Authentication"));
+        session.invalidate();
         model.addAttribute("data", new MsgAlert("로그아웃이 완료되었습니다.", "/"));
         //왜? 지금 jwt를 이용하여 인증을 하는데 로그인시 발급됐던 키를통해 인증을받기 때문에 key가 사라짐
         return "message";

@@ -13,7 +13,7 @@ import static javax.persistence.FetchType.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Authority {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @JsonIgnore
     private Long id;
     private String name;
