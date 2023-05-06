@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface LaptopBoardRepository extends JpaRepository<LaptopBoard,Long> {
+public interface LaptopBoardRepository extends JpaRepository<LaptopBoard,Long>, LaptopBoardRepositoryCustom {
     @Query("select lb from LaptopBoard lb left join fetch lb.member " +
             "where lb.member.id = :memberId")
     public List<LaptopBoard> laptopBoardsByMember(@Param("memberId") Long id);
