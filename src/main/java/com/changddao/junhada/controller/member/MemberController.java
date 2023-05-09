@@ -64,8 +64,7 @@ public class MemberController {
 
     @PostMapping("/members/logout")
     public String logout(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        //System.out.println(request.getHeader("Authentication"));
+        HttpSession session = request.getSession(false);
         session.invalidate();
         model.addAttribute("data", new MsgAlert("로그아웃이 완료되었습니다.", "/"));
         //왜? 지금 jwt를 이용하여 인증을 하는데 로그인시 발급됐던 키를통해 인증을받기 때문에 key가 사라짐

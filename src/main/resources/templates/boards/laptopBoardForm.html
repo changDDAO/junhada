@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common::head">
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+<div th:replace="fragments/common::bodyHeader(session)"></div>
+<div class="d-flex align-items-center w-100">
+  <div th:replace="fragments/Banner :: leftBanner"></div>
+  <div class="container">
+    <form role="form" action="/laptop/board/write" th:object="${laptopBoardFormDto}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <br>
+        <input type="hidden" th:field="*{id}" class="form-control">
+      </div>
+      <div class="form-group">
+        <label th:for="productName">제품 이름</label>
+        <input type="text" th:field="*{productName}" class="form-control"
+               placeholder="제품이름을 입력하세요">
+        <p class ="text-danger" th:if="${#fields.hasErrors('productName')}"
+           th:errors="*{productName}">제품이름 에러</p>
+        <br>
+      </div>
+      <div class="form-group">
+        <label th:for="productPrice">제품 가격</label>
+        <input type="text" th:field="*{productPrice}" class="form-control"
+               placeholder="제품가격을 입력하세요">
+        <p class ="text-danger" th:if="${#fields.hasErrors('productPrice')}"
+           th:errors="*{productPrice}">제품가격 에러</p>
+        <br>
+      </div>
+      <div class="form-group">
+        <label th:for="title">제목</label>
+        <input type="text" th:field="*{title}" class="form-control fieldError"
+               placeholder="제목을 입력하세요">
+        <p class ="text-danger" th:if="${#fields.hasErrors('title')}"
+           th:errors="*{title}">제목</p>
+        <br>
+      </div>
+      <div class="form-group">
+        <label th:for="productContent">제품 설명</label>
+        <textarea th:field="*{content}" class="form-control" style="height: 100px"
+                  placeholder="제품 설명을 입력하세요"></textarea>
+        <p class ="text-danger" th:if="${#fields.hasErrors('content')}"
+           th:errors="*{content}">제품 설명 에러</p>
+        <br>
+      </div>
+      <div class="form-group">
+        <h3>제품 사진 업로드</h3>
+        <input type="file" multiple="multiple" name="laptopFiles">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-success btn-lg w-25" >등록하기</button>
+    </form>
+    <br/>
+
+  </div><!-- /container -->
+  <div th:replace="fragments/Banner :: rightBanner"></div>
+
+</div>
+<div th:replace="fragments/common::footer"></div>
+</body>
+</html>
+

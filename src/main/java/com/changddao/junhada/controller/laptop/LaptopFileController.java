@@ -24,12 +24,10 @@ public class LaptopFileController {
     }
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("laptopFile")MultipartFile laptopFile,
-                             @RequestParam("laptopFiles")List<MultipartFile> laptopFiles)
+    public String uploadFile(@RequestParam("laptopFiles")List<MultipartFile> laptopFiles)
         throws IOException{
-        laptopFileService.saveLaptopFile(laptopFile);
         for(MultipartFile multipartFile :laptopFiles){
-            laptopFileService.saveLaptopFile(multipartFile);
+            //laptopFileService.saveLaptopFile(multipartFile,);
         }
         return "redirect:/";
     }

@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -47,6 +48,10 @@ public class LaptopBoard extends BaseEntity {
     public void setMember(Member member){
         this.member = member;
         member.getLaptopBoards().add(this);
+    }
+    public void setLaptopFiles(List<LaptopFile> files) {
+        this.laptopFiles = files;
+        files.forEach(o->o.setLaptopBoard(this));
     }
     //constructor
     public LaptopBoard(String productName, int productPrice, String title, String content) {

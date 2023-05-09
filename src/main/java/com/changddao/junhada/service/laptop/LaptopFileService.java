@@ -1,5 +1,6 @@
 package com.changddao.junhada.service.laptop;
 
+import com.changddao.junhada.entity.laptop.LaptopBoard;
 import com.changddao.junhada.entity.laptop.LaptopFile;
 import com.changddao.junhada.repository.laptop.LaptopFileRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class LaptopFileService {
 
  private final LaptopFileRepository laptopFileRepository;
 
- public Long saveLaptopFile(MultipartFile files) throws IOException{
+ public Long saveLaptopFile(MultipartFile files, LaptopBoard laptopBoard) throws IOException{
   if(files.isEmpty()) return null;
   //원래 파일 이름 추출
   String originName = files.getOriginalFilename();
@@ -33,7 +34,7 @@ public class LaptopFileService {
   String savedPath = fileDir+savedName;
 
   LaptopFile laptopFile = new LaptopFile(originName,savedName,savedPath);
-  //laptopFile.setBoard();  보드를 지정해주는 로직 들어가야함
+  laptopFile.setLaptopBoard(laptopBoard); // 보드를 지정해주는 로직 들어가야함
   files.transferTo(new File(savedPath));
   LaptopFile savedLaptopFile = laptopFileRepository.save(laptopFile);
  return savedLaptopFile.getId();
