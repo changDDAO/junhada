@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface LaptopBoardRepositoryCustom{
 
     public Page<LaptopBoardDto> laptopBoardPage(Pageable pageable);
+
 }

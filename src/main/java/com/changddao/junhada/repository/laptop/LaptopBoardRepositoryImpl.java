@@ -33,6 +33,5 @@ public class LaptopBoardRepositoryImpl implements LaptopBoardRepositoryCustom{
         List<LaptopBoardDto> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content, pageable,total);
-
     }
 }
