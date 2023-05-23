@@ -5,8 +5,11 @@ import com.changddao.junhada.controller.member.MemberSignResponse;
 import com.changddao.junhada.entity.LaptopBoardDto;
 import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.entity.laptop.LaptopBoard;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.jwt.JwtProvider;
 import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
+import com.changddao.junhada.repository.laptop.LaptopFileRepository;
+import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
 import com.changddao.junhada.service.MemberService;
 import com.changddao.junhada.service.laptop.LaptopFileService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,7 +39,9 @@ import java.util.List;
 public class LaptopBoardController {
     private final LaptopBoardRepository laptopBoardRepository;
     private final LaptopFileService laptopFileService;
+    private final LaptopReplyRepository laptopReplyRepository;
     private final MemberService memberService;
+    private final LaptopFileRepository laptopFileRepository;
 
     @GetMapping("/laptop/board")
     public String laptopBoardsList(Model model, @PageableDefault(size = 2) Pageable pageable) {
@@ -82,8 +88,11 @@ public class LaptopBoardController {
     }
 
     /*@GetMapping("/laptop/board/{id}")
-    public String findByIdLaptopBoard(@PathVariable("id") Long id) {
+    public String findByIdLaptopBoard(@PathVariable("id") Long id, Model model) {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
+        List<String> savedPath = laptopFileRepository.savedPathByBoardId(findBoard);
+        List<LaptopReply> repliesAtBoard =
+
 
 
     }*/

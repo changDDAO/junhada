@@ -26,7 +26,7 @@
        <tr>
        <tr th:each="laptopBoard : ${laptopBoards}">
            <td th:text="${laptopBoard.boardId}">번호</td>
-           <td th:text="${laptopBoard.title}" th:href="@{/laptop/board/}">제목</td>
+           <td th:text="${laptopBoard.title}" th:href="@{/laptop/board/${laptopBoard.boardId}}">제목</td>
            <td th:text="${laptopBoard.nickName}">작성자</td>
        </tr>
        </tbody>

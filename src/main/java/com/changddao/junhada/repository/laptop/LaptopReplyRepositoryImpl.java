@@ -2,6 +2,7 @@ package com.changddao.junhada.repository.laptop;
 
 import com.changddao.junhada.entity.LaptopBoardDto;
 import com.changddao.junhada.entity.QLaptopBoardDto;
+import com.changddao.junhada.entity.laptop.LaptopBoard;
 import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.entity.laptop.QLaptopBoard;
 import com.changddao.junhada.entity.laptop.QLaptopFile;
@@ -37,5 +38,16 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom{
         return result;
     }
 
-
+    @Override
+    public List<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard) {
+        List<LaptopReplyDto> result = queryFactory.select(new QLaptopReplyDto(laptopReply.replyContent,
+                        member.nickName,
+                        laptopReply.createdDate,
+                        laptopReply.lastModifiedDate))
+                .from(laptopReply)
+                .leftJoin(laptopReply.member, member)
+                .where(laptopReply.laptopBoard.eq(laptopBoard))
+                .fetch();
+        return result;
+    }
 }
