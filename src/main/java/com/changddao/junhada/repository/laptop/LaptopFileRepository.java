@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface LaptopFileRepository extends JpaRepository<LaptopFile, Long> {
 
-    @Query("select lf.savedPath from LaptopFile lf where lf.laptopBoard=:laptopBoard")
-    List<String> savedPathByBoardId(@Param("laptopBoard")LaptopBoard laptopBoard);
+    @Query("select new com.changddao.junhada.repository.laptop.LaptopFileDto(lf.id,lf.originName) " +
+            "from LaptopFile lf where lf.laptopBoard=:laptopBoard")
+    List<LaptopFileDto> laptopFilesAtBoard(@Param("laptopBoard")LaptopBoard laptopBoard);
 
 }

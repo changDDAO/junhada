@@ -5,33 +5,26 @@ import com.changddao.junhada.controller.member.MemberSignResponse;
 import com.changddao.junhada.entity.LaptopBoardDto;
 import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.entity.laptop.LaptopBoard;
-import com.changddao.junhada.entity.laptop.LaptopReply;
-import com.changddao.junhada.jwt.JwtProvider;
-import com.changddao.junhada.repository.laptop.LaptopBoardRepository;
-import com.changddao.junhada.repository.laptop.LaptopFileRepository;
-import com.changddao.junhada.repository.laptop.LaptopReplyRepository;
+import com.changddao.junhada.entity.laptop.LaptopFile;
+import com.changddao.junhada.repository.laptop.*;
 import com.changddao.junhada.service.MemberService;
 import com.changddao.junhada.service.laptop.LaptopFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -86,14 +79,28 @@ public class LaptopBoardController {
         model.addAttribute("data", new MsgAlert("글 작성이 완료되었습니다.", "/"));
         return "message";
     }
+    //view에 업로드한 이미지 출력하는 부분
+    @GetMapping("/laptop/images/{laptopFileId}")
+    @ResponseBody
+    public Resource printImage(@PathVariable("laptopFileId") Long id, Model model) throws IOException {
+        LaptopFile laptopFile = laptopFileRepository.findById(id).orElse(null);
+        return new UrlResource("file:" + laptopFile.getSavedPath());
+    }
 
-    /*@GetMapping("/laptop/board/{id}")
-    public String findByIdLaptopBoard(@PathVariable("id") Long id, Model model) {
+
+    @GetMapping("/laptop/board/{id}")
+    public String findByIdLaptopBoard(@PathVariable("id") Long id, Model model,
+                                      @PageableDefault(size = 2) Pageable pageable) {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
-        List<String> savedPath = laptopFileRepository.savedPathByBoardId(findBoard);
-        List<LaptopReply> repliesAtBoard =
-
-
-
-    }*/
+        List<LaptopFileDto> laptopFiles = laptopFileRepository.laptopFilesAtBoard(findBoard);
+        Page<LaptopReplyDto> laptopReplies = laptopReplyRepository.RepliesAtBoard(findBoard, pageable);
+        model.addAttribute("images",laptopFiles);
+        model.addAttribute("laptopBoard", findBoard);
+        model.addAttribute("laptopBoardReplies", laptopReplies);
+        int startPage = Math.max(1, laptopReplies.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(laptopReplies.getTotalPages(), laptopReplies.getPageable().getPageNumber() + 4);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        return "boards/specificBoardView";
+    }
 }

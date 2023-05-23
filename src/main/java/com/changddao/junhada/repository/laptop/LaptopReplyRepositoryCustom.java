@@ -11,7 +11,7 @@ import java.util.List;
 public interface LaptopReplyRepositoryCustom {
     public List<LaptopReply> findLaptopRepliesByMember(Long memberId);
 
-    public List<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard);
+    public Page<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard,Pageable pageable);
 
 
 

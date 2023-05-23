@@ -39,15 +39,17 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom{
     }
 
     @Override
-    public List<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard) {
-        List<LaptopReplyDto> result = queryFactory.select(new QLaptopReplyDto(laptopReply.replyContent,
+    public Page<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard,Pageable pageable) {
+        QueryResults<LaptopReplyDto> result = queryFactory.select(new QLaptopReplyDto(laptopReply.replyContent,
                         member.nickName,
                         laptopReply.createdDate,
                         laptopReply.lastModifiedDate))
                 .from(laptopReply)
                 .leftJoin(laptopReply.member, member)
                 .where(laptopReply.laptopBoard.eq(laptopBoard))
-                .fetch();
-        return result;
+                .fetchResults();
+        List<LaptopReplyDto> content = result.getResults();
+        long count = result.getTotal();
+        return new PageImpl<>(content,pageable,count);
     }
 }

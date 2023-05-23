@@ -38,13 +38,11 @@ class LaptopFileRepositoryTest {
         laptopFileRepository.save(laptopFile);
         laptopFileRepository.save(laptopFile1);
         laptopFileRepository.save(laptopFile2);
-        List<String> strings = laptopFileRepository.savedPathByBoardId(laptopBoard);
+
 
 
         //when
-        for (String string : strings) {
-            System.out.println("savePath"+string);
-        }
+
 
 
     //then

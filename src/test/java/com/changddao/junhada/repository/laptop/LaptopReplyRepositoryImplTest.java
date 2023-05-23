@@ -8,6 +8,7 @@ import com.changddao.junhada.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -59,9 +60,7 @@ class LaptopReplyRepositoryImplTest {
         laptopReplyRepository.save(laptopReply3);
 
         //when
-        List<LaptopReplyDto> laptopReplyDtos = laptopReplyRepository.RepliesAtBoard(laptopBoard);
-        for (LaptopReplyDto laptopReplyDto : laptopReplyDtos) {
-            System.out.println("laptopReplyDto = " + laptopReplyDto);
+
         }
 
 
@@ -70,4 +69,3 @@ class LaptopReplyRepositoryImplTest {
 
     }
 
-}
