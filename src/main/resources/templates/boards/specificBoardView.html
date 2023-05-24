@@ -15,30 +15,62 @@
   <div class="container" style="background-color: #6c757d">
     <div class="jumbotron">
       <div class="d-flex">
-        <div class="card-img-top" th:each="image:${images}">
-        <img th:src="|/laptop/images/${image.id}|" height="200px" width="200px">
+        <div class="card-img-top " th:each="image:${images}">
+        <img class="img-thumbnail"th:src="|/laptop/images/${image.id}|" height="150px" width="250px">
           <p th:text="${image.originName}">원래이름</p>
         </div>
       </div>
+      <div class="container">
+        <h6><p class="text-white" th:text="|상품명:${laptopBoard.productName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        상품가격:${laptopBoard.productPrice}|">상품명</p></h6>
+        <h6><p class="text-lg-start text-white">상품설명</p></h6>
+        <textarea class="" th:text="${laptopBoard.content}"rows="10" cols="150">상품설명</textarea>
+        <h6><p class="text-lg-start text-white">댓글</p></h6>
+        <table class="table table-hover text-white">
+          <thead>
+          <tr>
+            <th scope="col">닉네임</th>
+            <th scope="col">내용</th>
+            <th scope="col">작성시간</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="laptopBoardReply:${laptopBoardReplies}">
+            <td th:text="${laptopBoardReply.writer}">닉네임</td>
+            <td th:text="${laptopBoardReply.content}">내용</td>
+            <td th:text="${laptopBoardReply.writeDate}">작성일</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${1 == laptopBoardReplies.pageable.pageNumber+1}?'disabled'">
+              <a class="page-link" href = "#" th:href="@{/laptop/board/{id}(id=${laptopBoard.id}, page=${laptopBoardReplies.pageable.pageNumber - 1})}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == laptopBoardReplies.pageable.pageNumber+1}?'disabled'"
+                th:each="i : ${#numbers.sequence(startPage,endPage)}">
+              <a class="page-link" href="#" th:href="@{/laptop/board/{id}(id=${laptopBoard.id}, page=${i - 1})}"th:text="${i}">1</a></li>
 
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" th:classappend="${1 == laptopBoardReplies.pageable.pageNumber+1}?'disabled'">
-            <a class="page-link" href = "#" th:href="@{/laptop/board/${laptopBoard.id}(page=${laptopBoardReplies.pageable.pageNumber - 1})}">Previous</a>
-          </li>
-          <li class="page-item" th:classappend="${i == laptopBoardReplies.pageable.pageNumber+1}?'disabled'"
-              th:each="i : ${#numbers.sequence(startPage,endPage)} ">
-            <a class="page-link" href="#" th:href="@{/laptop/board(page=${i - 1})}"th:text="${i}">1</a></li>
+            <li class="page-item" th:classappend="${laptopBoardReplies.getTotalPages() == laptopBoardReplies.pageable.pageNumber+1}?'disabled'">
+              <a class="page-link" href="#" th:href="@{/laptop/board/{id}(id=${laptopBoard.id}, page=${laptopBoardReplies.pageable.pageNumber + 1})}">Next</a>
+            </li>
+          </ul>
+        </nav>
 
-          <li class="page-item" th:classappend="${laptopBoardReplies.getTotalPages() == laptopBoardReplies.pageable.pageNumber+1}?'disabled'">
-            <a class="page-link" href="#" th:href="@{/laptop/board(page=${laptopBoardReplies.pageable.pageNumber + 1})}">Next</a>
-          </li>
-        </ul>
-      </nav>
-      <div class = "text-lg-end">
-        <a type="button" class="btn btn-outline-success" th:href="@{/laptop/board/write}">글 작성하기</a>
+        <form class="" method="post" th:classappend="${#session}?'':'visually-hidden'" th:action="@{/laptop/board/reply/write}">
+          <p class="text-white text-start">댓글 작성하기</p>
+          <div class="d-flex">
+            <input type="hidden" th:name="boardId" th:value="${laptopBoard.id}">
+            <input type="text" class="form-control"th:name="replyContent">
+            <button class="btn-success w-25" type="submit">작성</button>
+          </div>
+          <p class ="text-danger text-start">댓글을 입력하세요</p>
+          <br><br>
+        </form>
 
       </div>
+
+
 
     </div>
   </div>

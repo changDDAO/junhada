@@ -6,6 +6,7 @@ import com.changddao.junhada.entity.LaptopBoardDto;
 import com.changddao.junhada.entity.Member;
 import com.changddao.junhada.entity.laptop.LaptopBoard;
 import com.changddao.junhada.entity.laptop.LaptopFile;
+import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.repository.laptop.*;
 import com.changddao.junhada.service.MemberService;
 import com.changddao.junhada.service.laptop.LaptopFileService;
@@ -79,6 +80,7 @@ public class LaptopBoardController {
         model.addAttribute("data", new MsgAlert("글 작성이 완료되었습니다.", "/"));
         return "message";
     }
+
     //view에 업로드한 이미지 출력하는 부분
     @GetMapping("/laptop/images/{laptopFileId}")
     @ResponseBody
@@ -94,7 +96,7 @@ public class LaptopBoardController {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
         List<LaptopFileDto> laptopFiles = laptopFileRepository.laptopFilesAtBoard(findBoard);
         Page<LaptopReplyDto> laptopReplies = laptopReplyRepository.RepliesAtBoard(findBoard, pageable);
-        model.addAttribute("images",laptopFiles);
+        model.addAttribute("images", laptopFiles);
         model.addAttribute("laptopBoard", findBoard);
         model.addAttribute("laptopBoardReplies", laptopReplies);
         int startPage = Math.max(1, laptopReplies.getPageable().getPageNumber() - 4);
@@ -102,5 +104,23 @@ public class LaptopBoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         return "boards/specificBoardView";
+
+    }
+
+    @PostMapping("/laptop/board/reply/write")
+    public String saveReply(
+            @RequestParam("boardId") Long id,
+            @RequestParam("replyContent") String content,
+            HttpServletRequest request) {
+        LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
+        LaptopReply reply = new LaptopReply(content);
+        reply.setLaptopBoard(findBoard);
+        HttpSession session = request.getSession(false);
+        MemberSignResponse user = (MemberSignResponse) session.getAttribute("user");
+        Member findMember = memberService.findOneMember(user.getMemberId());
+        reply.setMember(findMember);
+        laptopReplyRepository.save(reply);
+
+        return "redirect:/laptop/board/" + id;
     }
 }

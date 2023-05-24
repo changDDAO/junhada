@@ -47,6 +47,8 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom{
                 .from(laptopReply)
                 .leftJoin(laptopReply.member, member)
                 .where(laptopReply.laptopBoard.eq(laptopBoard))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetchResults();
         List<LaptopReplyDto> content = result.getResults();
         long count = result.getTotal();
