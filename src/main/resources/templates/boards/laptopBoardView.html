@@ -31,7 +31,7 @@
        </tr>
        </tbody>
    </table>
-      <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation example" th:classappend="${laptopBoards.getTotalElements()==0}?'visually-hidden'">
           <ul class="pagination justify-content-center">
               <li class="page-item" th:classappend="${1 == laptopBoards.pageable.pageNumber+1}?'disabled'">
                   <a class="page-link" href = "#" th:href="@{/laptop/board(page=${laptopBoards.pageable.pageNumber - 1})}">Previous</a>

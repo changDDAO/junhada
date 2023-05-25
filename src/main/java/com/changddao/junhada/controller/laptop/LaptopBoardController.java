@@ -96,6 +96,7 @@ public class LaptopBoardController {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
         List<LaptopFileDto> laptopFiles = laptopFileRepository.laptopFilesAtBoard(findBoard);
         Page<LaptopReplyDto> laptopReplies = laptopReplyRepository.RepliesAtBoard(findBoard, pageable);
+        model.addAttribute("replyContentDto", new ReplyContentDto());
         model.addAttribute("images", laptopFiles);
         model.addAttribute("laptopBoard", findBoard);
         model.addAttribute("laptopBoardReplies", laptopReplies);
@@ -110,10 +111,16 @@ public class LaptopBoardController {
     @PostMapping("/laptop/board/reply/write")
     public String saveReply(
             @RequestParam("boardId") Long id,
-            @RequestParam("replyContent") String content,
+            @Valid ReplyContentDto replyContentDto,BindingResult result,
+            Model model, @PageableDefault(size = 2)Pageable pageable,
             HttpServletRequest request) {
+        if (result.hasErrors()) {
+            model.addAttribute("data", new MsgAlert("댓글을 200자 이내, 한글자이상 입력해야합니다.",
+                    "/laptop/board/" + String.valueOf(id)));
+            return "message";
+        }
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
-        LaptopReply reply = new LaptopReply(content);
+        LaptopReply reply = new LaptopReply(replyContentDto.getContent());
         reply.setLaptopBoard(findBoard);
         HttpSession session = request.getSession(false);
         MemberSignResponse user = (MemberSignResponse) session.getAttribute("user");
