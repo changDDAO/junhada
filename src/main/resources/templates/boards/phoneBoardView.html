@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common::head">
+  <meta charset="UTF-8">
+  <title>board</title>
+</head>
+<body>
+<div th:replace="fragments/common::bodyHeader(session)">
+</div>
+<div class="d-flex align-items-center w-100">
+
+  <div th:replace="fragments/Banner :: leftBanner"></div>
+
+
+  <div class="container" style="background-color: #c5d7f2">
+    <div class="jumbotron">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr th:each="phoneBoard : ${phoneBoards}">
+          <td th:text="${phoneBoard.boardId}">번호</td>
+          <td> <a th:text="${phoneBoard.title}" th:href="@{|/phone/board/${phoneBoard.boardId}|}">제목</a></td>
+          <td th:text="${phoneBoard.nickName}">작성자</td>
+        </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example" th:classappend="${phoneBoards.getTotalElements()==0}?'visually-hidden'">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" th:classappend="${1 == phoneBoards.pageable.pageNumber+1}?'disabled'">
+            <a class="page-link" href = "#" th:href="@{/phone/board(page=${phoneBoards.pageable.pageNumber - 1})}">Previous</a>
+          </li>
+          <li class="page-item" th:classappend="${i == phoneBoards.pageable.pageNumber+1}?'disabled'"
+              th:each="i : ${#numbers.sequence(startPage,endPage)} ">
+            <a class="page-link" href="#" th:href="@{/phone/board(page=${i - 1})}"th:text="${i}">1</a></li>
+
+          <li class="page-item" th:classappend="${phoneBoards.getTotalPages() == phoneBoards.pageable.pageNumber+1}?'disabled'">
+            <a class="page-link" href="#" th:href="@{/phone/board(page=${phoneBoards.pageable.pageNumber + 1})}">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <div class = "text-lg-end">
+        <a type="button" class="btn btn-outline-success" th:href="@{/phone/board/write}">글 작성하기</a>
+
+      </div>
+
+    </div>
+  </div>
+  <div th:replace="fragments/Banner :: rightBanner"></div>
+</div>
+
+<div th:replace="fragments/common::footer"></div>
+
+</body>
+</html>

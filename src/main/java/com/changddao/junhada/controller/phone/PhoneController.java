@@ -1,21 +1,14 @@
 package com.changddao.junhada.controller.phone;
 
 import com.changddao.junhada.controller.MsgAlert;
-import com.changddao.junhada.controller.laptop.LaptopBoardFormDto;
-import com.changddao.junhada.controller.laptop.ReplyContentDto;
+import com.changddao.junhada.controller.laptop.LaptopReplyContentDto;
 import com.changddao.junhada.controller.member.MemberSignResponse;
-import com.changddao.junhada.entity.LaptopBoardDto;
 import com.changddao.junhada.entity.Member;
-import com.changddao.junhada.entity.laptop.LaptopBoard;
-import com.changddao.junhada.entity.laptop.LaptopFile;
-import com.changddao.junhada.entity.laptop.LaptopReply;
 import com.changddao.junhada.entity.phone.PhoneBoard;
 import com.changddao.junhada.entity.phone.PhoneFile;
 import com.changddao.junhada.entity.phone.PhoneReply;
-import com.changddao.junhada.repository.laptop.*;
 import com.changddao.junhada.repository.phone.*;
 import com.changddao.junhada.service.MemberService;
-import com.changddao.junhada.service.laptop.LaptopFileService;
 import com.changddao.junhada.service.phone.PhoneFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -103,7 +96,7 @@ public class PhoneController {
         PhoneBoard findBoard = phoneBoardRepository.findById(id).orElse(null);
         List<PhoneFileDto> phoneFiles = phoneFileRepository.phoneFilesAtBoard(findBoard);
         Page<PhoneReplyDto> phoneReplies = phoneReplyRepository.repliesAtBoard(findBoard, pageable);
-        model.addAttribute("replyContentDto", new ReplyContentDto());
+        model.addAttribute("phoneReplyContentDto", new PhoneReplyContentDto());
         model.addAttribute("images", phoneFiles);
         model.addAttribute("phoneBoard", findBoard);
         model.addAttribute("phoneBoardReplies", phoneReplies);
@@ -111,23 +104,23 @@ public class PhoneController {
         int endPage = Math.min(phoneReplies.getTotalPages(), phoneReplies.getPageable().getPageNumber() + 4);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        return "boards/specificBoardView";
+        return "boards/specificPhoneBoardView";
 
     }
 
     @PostMapping("/board/reply/write")
     public String saveReply(
             @RequestParam("boardId") Long id,
-            @Valid ReplyContentDto replyContentDto,BindingResult result,
+            @Valid PhoneReplyContentDto phoneReplyContentDto, BindingResult result,
             Model model, @PageableDefault(size = 2)Pageable pageable,
             HttpServletRequest request) {
         if (result.hasErrors()) {
             model.addAttribute("data", new MsgAlert("댓글을 200자 이내, 한글자이상 입력해야합니다.",
-                    "/laptop/board/" + String.valueOf(id)));
+                    "/phone/board/" + String.valueOf(id)));
             return "message";
         }
         PhoneBoard findBoard = phoneBoardRepository.findById(id).orElse(null);
-        PhoneReply reply = new PhoneReply(replyContentDto.getContent());
+        PhoneReply reply = new PhoneReply(phoneReplyContentDto.getContent());
         reply.setPhoneBoard(findBoard);
         HttpSession session = request.getSession(false);
         MemberSignResponse user = (MemberSignResponse) session.getAttribute("user");

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
-public class ReplyContentDto {
+public class LaptopReplyContentDto {
     @NotBlank(message = "댓글을 입력하세요")
     @Length(max = 200,message = "200자 이내로 입력하세요")
     private String Content;

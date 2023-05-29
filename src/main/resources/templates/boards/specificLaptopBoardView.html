@@ -39,6 +39,7 @@
             <td th:text="${laptopBoardReply.writer}">닉네임</td>
             <td th:text="${laptopBoardReply.content}">내용</td>
             <td th:text="${laptopBoardReply.writeDate}">작성일</td>
+            <td th:if="${laptopBoardReply.writer==session.user.nickName}"><button class=""</td>
           </tr>
           </tbody>
         </table>
@@ -57,7 +58,7 @@
           </ul>
         </nav>
 
-        <form class="" method="post" th:object="${replyContentDto}" th:classappend="${#session}?'':'visually-hidden'" th:action="@{/laptop/board/reply/write}">
+        <form class="" method="post" th:object="${laptopReplyContentDto}" th:classappend="${#session}?'':'visually-hidden'" th:action="@{/laptop/board/reply/write}">
           <p class="text-white text-start">댓글 작성하기</p>
           <div class="d-flex">
             <input type="hidden" th:name="boardId" th:value="${laptopBoard.id}">

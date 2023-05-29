@@ -97,7 +97,7 @@ public class LaptopBoardController {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
         List<LaptopFileDto> laptopFiles = laptopFileRepository.laptopFilesAtBoard(findBoard);
         Page<LaptopReplyDto> laptopReplies = laptopReplyRepository.RepliesAtBoard(findBoard, pageable);
-        model.addAttribute("replyContentDto", new ReplyContentDto());
+        model.addAttribute("laptopReplyContentDto", new LaptopReplyContentDto());
         model.addAttribute("images", laptopFiles);
         model.addAttribute("laptopBoard", findBoard);
         model.addAttribute("laptopBoardReplies", laptopReplies);
@@ -105,14 +105,14 @@ public class LaptopBoardController {
         int endPage = Math.min(laptopReplies.getTotalPages(), laptopReplies.getPageable().getPageNumber() + 4);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        return "boards/specificBoardView";
+        return "boards/specificLaptopBoardView";
 
     }
 
     @PostMapping("/board/reply/write")
     public String saveReply(
             @RequestParam("boardId") Long id,
-            @Valid ReplyContentDto replyContentDto,BindingResult result,
+            @Valid LaptopReplyContentDto laptopReplyContentDto, BindingResult result,
             Model model, @PageableDefault(size = 2)Pageable pageable,
             HttpServletRequest request) {
         if (result.hasErrors()) {
@@ -121,7 +121,7 @@ public class LaptopBoardController {
             return "message";
         }
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
-        LaptopReply reply = new LaptopReply(replyContentDto.getContent());
+        LaptopReply reply = new LaptopReply(laptopReplyContentDto.getContent());
         reply.setLaptopBoard(findBoard);
         HttpSession session = request.getSession(false);
         MemberSignResponse user = (MemberSignResponse) session.getAttribute("user");

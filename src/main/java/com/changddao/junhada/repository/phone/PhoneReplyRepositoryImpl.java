@@ -37,6 +37,7 @@ public class PhoneReplyRepositoryImpl implements PhoneReplyRepositoryCustom{
         QueryResults<PhoneReplyDto> results = queryFactory.select(new QPhoneReplyDto(phoneReply.replyContent,
                         member.nickName, phoneReply.member.createdDate, phoneReply.member.lastModifiedDate))
                 .from(phoneReply)
+                .leftJoin(phoneReply.member,member)
                 .where(phoneReply.phoneBoard.eq(phoneBoard))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
