@@ -33,7 +33,6 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom{
         List<LaptopReply> result = queryFactory.selectFrom(laptopReply)
                 .leftJoin(laptopReply.member, member).fetchJoin()
                 .where(laptopReply.member.id.eq(memberId))
-                .fetchJoin()
                 .fetch();
         return result;
     }

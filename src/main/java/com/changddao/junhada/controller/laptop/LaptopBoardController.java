@@ -74,9 +74,9 @@ public class LaptopBoardController {
         MemberSignResponse user = (MemberSignResponse) session.getAttribute("user");
         Member member = memberService.findOneMember(user.getMemberId());
         board.setMember(member);
-        LaptopBoard saved = laptopBoardRepository.save(board);
+        LaptopBoard savedLaptopBoard = laptopBoardRepository.save(board);
         for (MultipartFile laptopFile : laptopFiles) {
-            laptopFileService.saveLaptopFile(laptopFile, saved);
+            laptopFileService.saveLaptopFile(laptopFile, savedLaptopBoard);
         }
         model.addAttribute("data", new MsgAlert("글 작성이 완료되었습니다.", "/"));
         return "message";
