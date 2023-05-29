@@ -30,6 +30,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/laptop")
 public class LaptopBoardController {
     private final LaptopBoardRepository laptopBoardRepository;
     private final LaptopFileService laptopFileService;
@@ -37,7 +38,7 @@ public class LaptopBoardController {
     private final MemberService memberService;
     private final LaptopFileRepository laptopFileRepository;
 
-    @GetMapping("/laptop/board")
+    @GetMapping("/board")
     public String laptopBoardsList(Model model, @PageableDefault(size = 2) Pageable pageable) {
         Page<LaptopBoardDto> laptopBoards = laptopBoardRepository.laptopBoardPage(pageable);
         int startPage = Math.max(1, laptopBoards.getPageable().getPageNumber() - 4);
@@ -49,7 +50,7 @@ public class LaptopBoardController {
         return "boards/laptopBoardView";
     }
 
-    @GetMapping("/laptop/board/write")
+    @GetMapping("/board/write")
     public String writeLaptopBoard(Model model, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -61,7 +62,7 @@ public class LaptopBoardController {
         }
     }
 
-    @PostMapping("/laptop/board/write")
+    @PostMapping("/board/write")
     public String enrollProduct(@Valid LaptopBoardFormDto form, BindingResult result,
                                 @RequestParam("laptopFiles") List<MultipartFile> laptopFiles,
                                 HttpServletRequest request, Model model)
@@ -82,7 +83,7 @@ public class LaptopBoardController {
     }
 
     //view에 업로드한 이미지 출력하는 부분
-    @GetMapping("/laptop/images/{laptopFileId}")
+    @GetMapping("/images/{laptopFileId}")
     @ResponseBody
     public Resource printImage(@PathVariable("laptopFileId") Long id, Model model) throws IOException {
         LaptopFile laptopFile = laptopFileRepository.findById(id).orElse(null);
@@ -90,7 +91,7 @@ public class LaptopBoardController {
     }
 
 
-    @GetMapping("/laptop/board/{id}")
+    @GetMapping("/board/{id}")
     public String findByIdLaptopBoard(@PathVariable("id") Long id, Model model,
                                       @PageableDefault(size = 2) Pageable pageable) {
         LaptopBoard findBoard = laptopBoardRepository.findById(id).orElse(null);
@@ -108,7 +109,7 @@ public class LaptopBoardController {
 
     }
 
-    @PostMapping("/laptop/board/reply/write")
+    @PostMapping("/board/reply/write")
     public String saveReply(
             @RequestParam("boardId") Long id,
             @Valid ReplyContentDto replyContentDto,BindingResult result,

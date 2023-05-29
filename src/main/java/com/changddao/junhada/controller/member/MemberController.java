@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,15 +22,16 @@ import java.util.Collections;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/members")
 public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-    @GetMapping("/members/new")
+    @GetMapping("/new")
     public String memberForm(Model model){
         model.addAttribute("memberForm",new MemberForm());
         return "members/createMemberForm";
     }
-    @PostMapping("/members/new")
+    @PostMapping("/new")
     public String createMember(@Valid MemberForm memberForm, BindingResult result, Model model){
         if(result.hasErrors()) return "members/createMemberForm";
 
@@ -46,12 +44,12 @@ public class MemberController {
         model.addAttribute("data",new MsgAlert("회원가입이 완료되었습니다.","/"));
         return "message";
     }
-    @GetMapping("/members/login")
+    @GetMapping("/login")
     public String memberLoginForm(Model model){
         model.addAttribute("loginForm",new MemberForm());
         return "members/memberLoginForm";
     }
-    @PostMapping("/members/login")
+    @PostMapping("/login")
     public String login(@Valid LoginForm loginForm, BindingResult result, Model model,
                         HttpServletRequest request) {
         if(result.hasErrors()) return "members/memberLoginForm";
@@ -62,7 +60,7 @@ public class MemberController {
         return "message";
     }
 
-    @PostMapping("/members/logout")
+    @PostMapping("/logout")
     public String logout(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         session.invalidate();
