@@ -60,6 +60,8 @@ class LaptopReplyRepositoryImplTest {
         laptopReplyRepository.save(laptopReply3);
 
         //when
+        //댓글 삭제
+
 
         }
 

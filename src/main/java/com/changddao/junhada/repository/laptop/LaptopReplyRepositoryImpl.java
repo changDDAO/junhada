@@ -33,7 +33,8 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom {
 
     @Override
     public Page<LaptopReplyDto> RepliesAtBoard(LaptopBoard laptopBoard, Pageable pageable) {
-        QueryResults<LaptopReplyDto> result = queryFactory.select(new QLaptopReplyDto(laptopReply.replyContent,
+        QueryResults<LaptopReplyDto> result = queryFactory.select(new QLaptopReplyDto(laptopReply.id,
+                        laptopReply.replyContent,
                         member.nickName,
                         laptopReply.createdDate,
                         laptopReply.lastModifiedDate))
@@ -47,4 +48,5 @@ public class LaptopReplyRepositoryImpl implements LaptopReplyRepositoryCustom {
         long count = result.getTotal();
         return new PageImpl<>(content, pageable, count);
     }
+
 }

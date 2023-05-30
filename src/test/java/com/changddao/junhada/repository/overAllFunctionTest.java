@@ -40,6 +40,7 @@ class overAllFunctionTest {
         //변경감지 detect modification
         Member findMember = memberRepository.findById(member1.getId()).orElse(null);
         findMember.changeNickname("바뀐 창따오");
+
     }
 
     @Test

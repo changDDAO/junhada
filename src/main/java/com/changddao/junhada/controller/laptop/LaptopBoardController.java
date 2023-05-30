@@ -131,4 +131,18 @@ public class LaptopBoardController {
 
         return "redirect:/laptop/board/" + id;
     }
+    @GetMapping("/board/{boardId}/reply/delete/{replyId}")
+    public String deleteLaptopReply(@PathVariable("boardId") Long boardId,
+                                    @PathVariable("replyId")Long replyId ) {
+        laptopReplyRepository.deleteById(replyId);
+        return "redirect:/laptop/board/"+boardId;
+    }
+    @GetMapping("/board/{boardId}/reply/update/{replyId}")
+    public String updateLaptopReply(@PathVariable("boardId") Long boardId,
+                                    @PathVariable("replyId")Long replyId ) {
+        LaptopReply findLaptopReply = laptopReplyRepository.findById(replyId).orElse(null);
+        findLaptopReply.changeContent("test");
+        laptopReplyRepository.save(findLaptopReply);
+        return "redirect:/laptop/board/"+boardId;
+    }
 }

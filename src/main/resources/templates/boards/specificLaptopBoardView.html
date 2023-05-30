@@ -24,7 +24,7 @@
         <h6><p class="text-white" th:text="|상품명:${laptopBoard.productName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         상품가격:${laptopBoard.productPrice}|">상품명</p></h6>
         <h6><p class="text-lg-start text-white">상품설명</p></h6>
-        <textarea class="" th:text="${laptopBoard.content}"rows="10" cols="150">상품설명</textarea>
+        <textarea disabled th:text="${laptopBoard.content}"rows="10" cols="150">상품설명</textarea>
         <h6><p class="text-lg-start text-white">댓글</p></h6>
         <table class="table table-hover text-white">
           <thead>
@@ -39,7 +39,11 @@
             <td th:text="${laptopBoardReply.writer}">닉네임</td>
             <td th:text="${laptopBoardReply.content}">내용</td>
             <td th:text="${laptopBoardReply.writeDate}">작성일</td>
-            <td th:if="${laptopBoardReply.writer==session.user.nickName}"><button class=""</td>
+            <td th:if="${laptopBoardReply.writer==session.user.nickName}"><a class="btn-sm btn-primary" href="#" role="button"
+            th:href="@{|/laptop/board/${laptopBoard.id}/reply/update/${laptopBoardReply.laptopReplyId}|}">수정</a>
+              <a class="btn-sm btn-danger " href="#" role="button"
+                 th:href="@{|/laptop/board/${laptopBoard.id}/reply/delete/${laptopBoardReply.laptopReplyId}|}">삭제</a>
+            </td>
           </tr>
           </tbody>
         </table>

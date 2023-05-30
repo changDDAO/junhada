@@ -39,6 +39,9 @@ public class LaptopReply extends BaseEntity {
         this.member = member;
         member.getLaptopReplies().add(this);
     }
+    public void changeContent(String content) {
+        this.replyContent=content;
+    }
 
     public LaptopReply(String replyContent) {
         this.replyContent = replyContent;
