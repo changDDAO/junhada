@@ -39,9 +39,10 @@
             <td th:text="${laptopBoardReply.writer}">닉네임</td>
             <td th:text="${laptopBoardReply.content}">내용</td>
             <td th:text="${laptopBoardReply.writeDate}">작성일</td>
-            <td th:if="${laptopBoardReply.writer==session.user.nickName}"><a class="btn-sm btn-primary" href="#" role="button"
+            <td><a class="btn-sm btn-primary" th:if="${laptopBoardReply.writer==session.user.nickName}" href="#" role="button"
             th:href="@{|/laptop/board/${laptopBoard.id}/reply/update/${laptopBoardReply.laptopReplyId}|}">수정</a>
               <a class="btn-sm btn-danger " href="#" role="button"
+                 th:if="${laptopBoardReply.writer==session.user.nickName}"
                  th:href="@{|/laptop/board/${laptopBoard.id}/reply/delete/${laptopBoardReply.laptopReplyId}|}">삭제</a>
             </td>
           </tr>

@@ -133,16 +133,18 @@ public class LaptopBoardController {
     }
     @GetMapping("/board/{boardId}/reply/delete/{replyId}")
     public String deleteLaptopReply(@PathVariable("boardId") Long boardId,
-                                    @PathVariable("replyId")Long replyId ) {
+                                    @PathVariable("replyId")Long replyId, Model model ) {
         laptopReplyRepository.deleteById(replyId);
-        return "redirect:/laptop/board/"+boardId;
+        model.addAttribute("data", new MsgAlert("글 삭제가 완료되었습니다.", "/laptop/board/"
+                + String.valueOf(boardId)));
+        return "message";
     }
     @GetMapping("/board/{boardId}/reply/update/{replyId}")
     public String updateLaptopReply(@PathVariable("boardId") Long boardId,
-                                    @PathVariable("replyId")Long replyId ) {
+                                    @PathVariable("replyId")Long replyId, Model model) {
         LaptopReply findLaptopReply = laptopReplyRepository.findById(replyId).orElse(null);
         findLaptopReply.changeContent("test");
         laptopReplyRepository.save(findLaptopReply);
-        return "redirect:/laptop/board/"+boardId;
+        return "redirect:/laptop/board/{boardId}";
     }
 }
