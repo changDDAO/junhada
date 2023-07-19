@@ -42,17 +42,16 @@ public class LaptopApiController {
     @GetMapping(value = "/api/images/{laptopFileId}")
     public ResponseEntity<Resource> printImage(@PathVariable("laptopFileId") Long id) throws IOException, URISyntaxException {
         LaptopFile laptopFile = laptopFileRepository.findById(id).orElse(null);
-        Resource resource = new UrlResource("file:"+laptopFile.getSavedPath());
-        if (!resource.exists()) {
+        if (laptopFile==null) {
             System.out.println(Font.SERIF+"File : Not_Found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
+        Resource resource = new UrlResource("file:"+laptopFile.getSavedPath());
         HttpHeaders header = new HttpHeaders();
         Path filePath = null;
         try {
             //filePath = Paths.get(resource.getURI());
-            header.add("Content-Type", Files.probeContentType(filePath));
+            header.add("Content-Type", Files.probeContentType(resource.getFile().toPath()));
         } catch (Exception e) {
             e.printStackTrace();
         }
